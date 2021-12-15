@@ -18,6 +18,9 @@
                 <img src="public/logo.png">
                 <h1>Vue.js Poster Shop</h1>
             </div>
+            <form class="search-bar" v-on:submit.prevent="onSubmit">
+                <input type="submit" value="Search" class="btn">
+            </form>
         </div>
     </div>
     <div class="main container">
@@ -34,11 +37,13 @@
             <ul>
                 <li v-for="item in cart">
                     <div class="item-title">{{ item.title }}</div>
-                    <div class="item-qty">{{ item.price }} x {{ item.qty }}</div>
+                    <span class="item-qty">{{ item.price | currency }} x {{ item.qty }}</span>
+                    <button class="btn" v-on:click="inc(item)">+</button>
+                    <button class="btn" v-on:click="dec(item)">-</button>
                 </li>
             </ul>
             <div v-if="cart.length">
-                Total: {{ total }}
+                Total: {{ total | currency }}
             </div>
             <div v-else class="empty-cart">
                 No items in cart.
